@@ -1,0 +1,58 @@
+﻿@model IEnumerable<schedule_mvc.Models.Appointment>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    var count_text = ViewData["CountText"];
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+
+<h1>Upcoming Appointments</h1>
+
+<hr />
+
+<div>@count_text</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Client.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor.Name)
+                </td>
+                <td>
+                    <a asp-controller="Appointments" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="Appointments" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="Appointments" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

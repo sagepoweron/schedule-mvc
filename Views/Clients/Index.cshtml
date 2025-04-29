@@ -1,0 +1,63 @@
+﻿@model IEnumerable<schedule_mvc.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    var count_text = ViewData["CountText"];
+}
+
+<h1>Clients</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<hr />
+
+<form asp-controller="Clients" asp-action="Index" method="get">
+    <p>
+        Name: <input type="text" name="name" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
+
+<div>@count_text</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

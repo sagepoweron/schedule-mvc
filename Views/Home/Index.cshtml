@@ -1,0 +1,54 @@
+﻿@model schedule_mvc.Views.Home.IndexVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+
+<h1>Upcoming Appointments</h1>
+
+<hr />
+
+<div>@Model.Text</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameForInnerType((Appointment element) => element.DateTime)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((Appointment element) => element.Client)
+            </th>
+            <th>
+                @Html.DisplayNameForInnerType((Appointment element) => element.Doctor)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var element in Model.Appointments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => element.DateTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => element.Client.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => element.Doctor.Name)
+                </td>
+                <td>
+                    <a asp-controller="Appointments" asp-action="Edit" asp-route-id="@element.Id">Edit</a> |
+                    <a asp-controller="Appointments" asp-action="Details" asp-route-id="@element.Id">Details</a> |
+                    <a asp-controller="Appointments" asp-action="Delete" asp-route-id="@element.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
